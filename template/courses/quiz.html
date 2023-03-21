@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="assets/css/app/quiz-inner.css">
+<div id="wrapper" class="mt-5 mb-5" ng-controller="quiz-inner">
+	<div id="display-container" ng-show="param == 'start'" data-aos="zoom-in-down">
+    <div class="name_course mb-5 text-center">
+      <h3>{{ name_quiz }}</h3>
+    </div>
+		<div class="header">
+			<div class="number-of-count">
+				<span class="number-of-question">{{quiz.length}} câu hỏi</span>
+			</div>
+      <div class="d-flex">
+        <div class="timer-div">
+          <img src="https://svgshare.com/i/iRM.svg" />&nbsp;
+          <span class="time-left" id="timer">{{time}}</span>
+        </div>&emsp;
+        <div>
+          <button class="btn btn-danger" ng-click="endTest()" >Kết thúc</button>
+        </div>
+      </div>
+    </div>
+		<div id="container" ng-repeat="item in quiz | limitTo:pageSize:(currentAnswer * pageSize)">
+      <p class="question fw-bold">Câu {{currentAnswer+1}}: {{item.Text}}</p>
+			<label ng-repeat="answer in item.Answers">
+        <input type="radio" ng-click="chooseAnswer(item.Id,answer.Id)"  ng-model="item.checked" name="radio" id="{{answer.Id}}" value="{{answer.Id}}"/>
+        <span>{{answer.Text}}</span> 
+      </label>
+		</div>
+		<div class="btn-container d-flex justify-content-between">
+			<button class="btn btn-success" ng-disabled="currentAnswer == 0" ng-click="currentAnswer=currentAnswer-1">Câu trước</button>
+			<button class="btn btn-success" 
+				ng-disabled="currentAnswer >= numberOfPages() - 1" 
+				ng-click="currentAnswer=currentAnswer+1"
+				ng-hide=""
+				>
+				Câu tiếp theo
+			</button>
+		</div>
+	</div>
+	<div id="display-container" ng-show="param == null" class="d-flex justify-content-center align-items-center flex-column" data-aos="fade-down" >
+    <div class="name_course mb-5 text-center">
+      <h3>{{ name_quiz }}</h3>
+    </div>
+    <div>
+      <a class="btn btn-secondary" href="#!courses">Quay lại</a>
+      <a class="btn btn-success" href="#!quiz?id={{id_course}}&act=start">Bắt đầu<a>
+    </div>
+	</div>
+</div>

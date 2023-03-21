@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="assets/css/app/quiz-inner.css">
+<div id="wrapper" class="mt-5 mb-5" ng-controller="quiz-result">
+	<div id="display-container" data-aos="zoom-in-up">
+    <div  class="d-flex justify-content-center align-items-center flex-column mb-5">
+      <div class="name_course mb-3 text-center"><h3>{{ name_quiz }}</h3></div>
+      <div class="point">{{student_mark_result}} điểm</div>
+    </div>
+		<div id="container">
+      <div class="mb-5" ng-repeat="item in quiz">
+        <p class="question fw-bold">{{item.Text}}</p>
+        <label ng-repeat="answer in item.Answers">
+          <input id="{{answer.Id}}" value="{{answer.Id}}" type="radio" disabled>
+          <span>{{answer.Text}}</span> 
+        </label>
+      </div>
+    </div>
+	</div>
+</div>

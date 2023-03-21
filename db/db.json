@@ -1,0 +1,66 @@
+{
+  "students": [
+    {
+      "username": "admin",
+      "password": "1",
+      "fullname": "Admin",
+      "email": "admin@gmail.com",
+      "id": 1
+    },
+    {
+      "username": "client",
+      "password": "2",
+      "fullname": "Client",
+      "email": "client@gmail.com",
+      "id": 2
+    }
+  ],
+  "students_quiz": [
+    {
+      "id": 1
+    }
+  ],
+  "student_marks": [
+    {
+      "id": 1
+    }
+  ],
+  "student_results": [
+    {
+      "id": 1
+    },
+    {
+      "id_user": 1,
+      "id_course": "ADAV",
+      "mark": 6,
+      "answer": [
+        {
+          "question": 25106,
+          "choose": 104121,
+          "checked": false
+        },
+        {
+          "question": 25107,
+          "choose": 104124,
+          "checked": false
+        },
+        {
+          "question": 25108,
+          "choose": 104129,
+          "checked": false
+        },
+        {
+          "question": 25109,
+          "choose": 104130,
+          "checked": false
+        },
+        {
+          "question": 25110,
+          "choose": 104137,
+          "checked": false
+        }
+      ],
+      "id": 2
+    }
+  ]
+}
