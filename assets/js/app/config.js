@@ -75,18 +75,15 @@ app.run(function ($rootScope,$location) {
       title: 'Đăng xuất thành công ! :)',
       showConfirmButton: true,
       timer: 2000
+    }).then(isConfirm=>{
+      if(isConfirm){
+        $location.path("#!index")
+      }
     })
+    setTimeout(() => {
+      $location.path("#!index")
+    },2000)
   }
 });
 
-app.controller('navCtrl', function ($scope, $rootScope){
-  $('#navbarText li a').on('click', function(){
-    $('#navbarText li a.active').removeClass('active');
-    $(this).addClass('active');
-  });
-  
-  $scope.param_url = $rootScope.router
-// console.log($rootScope.router);
-  
-})
 
