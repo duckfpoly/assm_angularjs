@@ -1,9 +1,9 @@
 var app = angular.module("myApp", ["ngRoute"]);
 
 app.service("dataService", function ($location, $rootScope,$http) {
+  
   $rootScope.apiUrl = "http://localhost:3000/"
   $rootScope.emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
 
   const baseDb = 'db/'
   
@@ -78,4 +78,15 @@ app.run(function ($rootScope,$location) {
     })
   }
 });
+
+app.controller('navCtrl', function ($scope, $rootScope){
+  $('#navbarText li a').on('click', function(){
+    $('#navbarText li a.active').removeClass('active');
+    $(this).addClass('active');
+  });
+  
+  $scope.param_url = $rootScope.router
+// console.log($rootScope.router);
+  
+})
 
