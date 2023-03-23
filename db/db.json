@@ -15,16 +15,6 @@
       "id": 2
     }
   ],
-  "students_quiz": [
-    {
-      "id": 1
-    }
-  ],
-  "student_marks": [
-    {
-      "id": 1
-    }
-  ],
   "student_results": [
     {
       "id": 1
@@ -32,7 +22,7 @@
     {
       "id_user": 1,
       "id_course": "ADAV",
-      "mark": 6,
+      "point": 8,
       "answer": [
         {
           "question": 25106,
@@ -46,12 +36,12 @@
         },
         {
           "question": 25108,
-          "choose": 104129,
+          "choose": 104128,
           "checked": false
         },
         {
           "question": 25109,
-          "choose": 104130,
+          "choose": 104132,
           "checked": false
         },
         {

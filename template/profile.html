@@ -3,14 +3,14 @@
   <div class="row">
     <div class="col-12 col-md-3">
       <div class="list-group" id="list-tab" role="tablist">
-        <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Thông tin cá nhân</a>
-        <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">Đổi mật khẩu</a>
-        <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">Điểm thi</a>
+        <a class="list-group-item list-group-item-action {{auto_active[0]}}" id="list-home-list" onclick="location.href='#!/profile'" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Thông tin cá nhân</a>
+        <a class="list-group-item list-group-item-action {{active_change_pass[0]}}" id="list-profile-list" data-bs-toggle="list" onclick="location.href='#!/profile?tab=change_pass'" href="#list-profile" role="tab" aria-controls="list-profile">Đổi mật khẩu</a>
+        <a class="list-group-item list-group-item-action {{active_show_result[0]}}" id="list-messages-list" data-bs-toggle="list" onclick="location.href='#!/profile?tab=show_result'" href="#list-messages" role="tab" aria-controls="list-messages">Điểm Quiz</a>
       </div>
     </div>
     <div class="col-12 col-md-9">
       <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+        <div class="tab-pane fade {{auto_active[1]}} {{auto_active[0]}}" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
           <section class="bg-light" style="height: auto;">
             <div class="container">
               <div class="row mt-5">
@@ -45,7 +45,7 @@
             </div>
           </section>
         </div>
-        <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+        <div class="tab-pane fade {{active_change_pass[1]}} {{active_change_pass[0]}}" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
           <section class="bg-light">
             <div class="container">
               <div class="row mt-5">
@@ -82,7 +82,7 @@
             </div>
           </section>
         </div>
-        <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+        <div class="tab-pane fade {{active_show_result[1]}} {{active_show_result[0]}}" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
           <section class="bg-light" style="height: 550px;">
             <div class="container">
               <div class="row mt-5">
@@ -92,14 +92,14 @@
                             <table class="table text-center">
                               <thead>
                                 <tr>
-                                  <th>Môn học</th>
+                                  <th>Môn</th>
                                   <th>Điểm</th>
                                   <th>Trạng thái</th>
                                   <th></th>
                                 </tr>
                               </thead>
-                              <tbody>
-                                <tr ng-repeat="item in quizTest">
+                              <tbody id="myTbody">
+                                <tr>
                                   <td>{{ item.id_course }}</td>
                                   <td>{{item.mark}}</td>
                                   <td><span class="text-{{item.mark >= 5 ? 'success' : 'danger'}} fw-bold">{{item.mark >= 5 ? 'Passed' : 'Fails'}}</span></td>

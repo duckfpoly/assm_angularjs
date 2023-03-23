@@ -15,10 +15,13 @@ app.service("dataService", function ($location, $rootScope,$http) {
     return axios.get(`${$rootScope.apiUrl}students`);
   };
 
+  this.showStudents = function (id) {
+    return axios.get(`${$rootScope.apiUrl}students${id}`);
+  };
+
   this.addStudent = function (data) {
     return axios.post(`${$rootScope.apiUrl}students`,data);
   };
-
  
   this.updateStudent = function (id,data) {
     return axios.patch(`${$rootScope.apiUrl}students/${id}`,data);
@@ -27,10 +30,13 @@ app.service("dataService", function ($location, $rootScope,$http) {
   this.getStudentresult = () => {
     return axios.get(`${$rootScope.apiUrl}student_results`);
   };
-  
 
   this.postStudentresult = (data) => {
     return axios.post(`${$rootScope.apiUrl}student_results`,data);
+  };
+
+  this.updateStudentresult = (id,data) => {
+    return axios.patch(`${$rootScope.apiUrl}student_results/${id}`,data);
   };
 
   this.checkLogin = () => {

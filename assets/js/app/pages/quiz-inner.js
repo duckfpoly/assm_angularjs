@@ -21,7 +21,14 @@ app.controller("quiz-inner", function ($scope, $rootScope, $routeParams, $interv
       dataService.getSubjects().then(response => {
         $scope.subjects = response.data
         const subjects = $scope.subjects.find(item => {
-          return item.Id === $routeParams.id ?  $scope.name_quiz = item.Name : false
+          if(item.Id === $routeParams.id){
+            $scope.name_quiz = item.Name
+            $scope.image_quiz = item.Logo
+            return true
+          }else {
+            return false
+          }
+          // return item.Id === $routeParams.id ?  $scope.name_quiz = item.Name : false
         });
         if(subjects){
           if($scope.param == 'start'){
@@ -134,39 +141,37 @@ app.controller("quiz-inner", function ($scope, $rootScope, $routeParams, $interv
           }
         });
       // });
-    });
+      });
     // console.log($scope.mark);
     $scope.final($scope.results,$scope.mark)
   }
 
-  $scope.final = function (arr_results,point) {
-    // dataService.getStudentMark().then(results => {
-      // var objectss = { id_user: $rootScope.student.id, id_course: $scope.id_course, mark: point, }
-      // const index = studentsMark.findIndex(item => {
-      //   return item.id_user == $rootScope.student.id && item.id_course == $scope.id_course ? $scope.item_quiz = item : false
-      // })
-      const result = {
-        id_user: $rootScope.student.id, 
-        id_course: $scope.id_course,
-        mark: point,
-        answer: arr_results
-      }
-      try {
-        dataService.postStudentresult(result)
-        window.location.href = "#!/result?id="+ $scope.id_course
-      }catch (err){
-        console.log(err);
-      }
-      // dataService.postStudentresult(result)
-      // index !== -1 ? dataService.updateStudentMark($scope.item_quiz.id,objectss) : dataService.postStudentMark(objectss)
-      // const requests = arr_results.map(item => dataService.postStudentQuiz(item));
-      // Promise.all(requests)
-      //   .then(responses => {
-      //     window.location.href = "#!/result?id="+ $scope.id_course
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
-    // });
+  $scope.final = (arr_results,point) => {
+    const resultFinal = {
+      id_user: $rootScope.student.id, 
+      id_course: $scope.id_course,
+      point: point,
+      answer: arr_results
+    }
+    try {
+      var result2 = null
+      dataService.getStudentresult().then(result => {
+        result.data.forEach(element => {
+          if(element.id_course == $scope.id_course && element.id_user == $rootScope.student.id){
+            result2 = element
+          }
+        });
+        if(result2 == null){
+          dataService.postStudentresult(resultFinal)
+        }else {
+          dataService.updateStudentresult(result2.id,resultFinal)
+        }
+      })
+      window.location.href = "#!/result?id="+ $scope.id_course
+    }catch (err){
+      console.log(err);
+    }
   }
+
+
 })

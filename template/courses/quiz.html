@@ -10,7 +10,7 @@
 			</div>
       <div class="d-flex">
         <div class="timer-div">
-          <img src="https://svgshare.com/i/iRM.svg" />&nbsp;
+          <i class="fa-solid fa-clock"></i>&nbsp;
           <span class="time-left" id="timer">{{time}}</span>
         </div>&emsp;
         <div>
@@ -38,7 +38,8 @@
 	</div>
 	<div id="display-container" ng-show="param == null" class="d-flex justify-content-center align-items-center flex-column" data-aos="fade-down" >
     <div class="name_course mb-5 text-center">
-      <h3>{{ name_quiz }}</h3>
+      <h3 class="mb-5">{{ name_quiz }}</h3>
+      <img src="../../assets/images/logos/{{ image_quiz }}" alt="">
     </div>
     <div>
       <a class="btn btn-secondary" href="#!courses">Quay lại</a>
