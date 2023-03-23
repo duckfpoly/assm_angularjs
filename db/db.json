@@ -22,7 +22,7 @@
     {
       "id_user": 1,
       "id_course": "ADAV",
-      "point": 8,
+      "point": 4,
       "answer": [
         {
           "question": 25106,
@@ -41,12 +41,12 @@
         },
         {
           "question": 25109,
-          "choose": 104132,
+          "choose": 104133,
           "checked": false
         },
         {
           "question": 25110,
-          "choose": 104137,
+          "choose": 104136,
           "checked": false
         }
       ],

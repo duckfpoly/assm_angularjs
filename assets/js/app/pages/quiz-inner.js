@@ -1,4 +1,4 @@
-app.controller("quiz-inner", function ($scope, $rootScope, $routeParams, $interval, dataService) {
+app.controller("quiz-inner", ($scope, $rootScope, $routeParams, $interval, dataService) => {
 
   $scope.id_user = $rootScope.student.id
   $scope.param = $routeParams.act
@@ -6,15 +6,11 @@ app.controller("quiz-inner", function ($scope, $rootScope, $routeParams, $interv
   $scope.name_course = null
   $scope.results = []
   $scope.mark = 0
-  $scope.time_count = 5;
-
+  $scope.time_count = 15;
 
   var quizs = [];
-  // var studentsMark = [];
 
   dataService.getQuiz($scope.id_course).then(res => { quizs = res.data.slice(0, 5) })
-  // dataService.getStudentMark().then(results => { studentsMark = results.data })
-
 
   if($rootScope.student != null){
     if($routeParams.id){
@@ -28,7 +24,6 @@ app.controller("quiz-inner", function ($scope, $rootScope, $routeParams, $interv
           }else {
             return false
           }
-          // return item.Id === $routeParams.id ?  $scope.name_quiz = item.Name : false
         });
         if(subjects){
           if($scope.param == 'start'){
@@ -58,28 +53,25 @@ app.controller("quiz-inner", function ($scope, $rootScope, $routeParams, $interv
     swal.fire({
       icon: 'error',
       title: 'Vui lòng đăng nhập !',
-    }).then(function(isConfirm) {
+    }).then(isConfirm =>{
       if(isConfirm){
         window.location.href = "#!login"
       }
     })
   }
 
-  $scope.getQuiz = function () {
-    // dataService.getQuiz($scope.id_course)
-    //   .then(response => {
-        $scope.quiz = quizs
-        $scope.currentAnswer = 0
-        $scope.pageSize = 1
-        $scope.numberOfPages = function () {
-          return Math.ceil($scope.quiz.length / $scope.pageSize)
-        };
-      // });
+  $scope.getQuiz = () => {
+    $scope.quiz = quizs
+    $scope.currentAnswer = 0
+    $scope.pageSize = 1
+    $scope.numberOfPages = () => {
+      return Math.ceil($scope.quiz.length / $scope.pageSize)
+    };
   }
 
-  $scope.countDown = function () {
+  $scope.countDown = () => {
     $scope.countDownDate = new Date().getTime() + $scope.time_count * 60 * 1000;
-    $scope.x = $interval(function() {
+    $scope.x = $interval(() => {
       var distance = $scope.countDownDate - new Date().getTime();
       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
@@ -87,19 +79,19 @@ app.controller("quiz-inner", function ($scope, $rootScope, $routeParams, $interv
       if (distance < 0) {
         $interval.cancel($scope.x);
         $scope.time = ''
-        // swal.fire({
-        //   icon: 'error',
-        //   title: 'Đã hết thời gian làm bài !',
-        //   showConfirmButton: false,
-        //   timer: 2000
-        // }).then(function(isConfirm) {
-        //   $scope.mark_calc()
-        // })
+        swal.fire({
+          icon: 'error',
+          title: 'Đã hết thời gian làm bài !',
+          showConfirmButton: false,
+          timer: 2000
+        }).then(() => {
+          $scope.mark_calc()
+        })
       }
     }, 1000);
   }
 
-  $scope.chooseAnswer = function(value,value2) {
+  $scope.chooseAnswer = (value,value2) => {
     if(value != undefined && value2 !== undefined){
       $scope.results.forEach(element => {
         element.id == value ? element.checked = true : element.checked = false
@@ -118,31 +110,39 @@ app.controller("quiz-inner", function ($scope, $rootScope, $routeParams, $interv
     }
   }
 
-  $scope.endTest = function () { 
-    $interval.cancel($scope.x);
-    swal.fire({
-      icon: 'success',
-      title: 'Nộp bài thành công !',
-      showConfirmButton: false,
-      timer: 2000
-    }).then(function() {
-      $scope.mark_calc()
+  $scope.endTest = () => { 
+    Swal.fire({
+      title: 'Bạn chắc chắn nộp bài?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $interval.cancel($scope.x);
+        Swal.fire({
+          icon: 'success',
+          title: 'Nộp bài thành công !',
+          showConfirmButton: false,
+          timer: 2000
+        }).then(function() {
+          $scope.mark_calc()
+        })
+      }
     })
   }
 
-  $scope.mark_calc = function () {
-    // dataService.getQuiz($scope.id_course).then(result => {
-      quizs.forEach(quiz => {
-        $scope.results.forEach(answer => {
-          if (quiz.Id === answer.question && quiz.AnswerId === answer.choose){
-            $scope.mark += 2
-          } else {
-            $scope.mark += 0
-          }
-        });
-      // });
+  $scope.mark_calc = () => {
+    quizs.forEach(quiz => {
+      $scope.results.forEach(answer => {
+        if (quiz.Id === answer.question && quiz.AnswerId === answer.choose){
+          $scope.mark += 2
+        } else {
+          $scope.mark += 0
+        }
       });
-    // console.log($scope.mark);
+    });
     $scope.final($scope.results,$scope.mark)
   }
 
@@ -172,6 +172,4 @@ app.controller("quiz-inner", function ($scope, $rootScope, $routeParams, $interv
       console.log(err);
     }
   }
-
-
 })

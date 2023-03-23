@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="assets/css/app/course.css">
 <div class="container mt-5 mb-5" ng-controller="coursesCtrl">
-<!-- <div class="container mt-5 mb-5" ng-controller="coursesCtrl"> -->
   <h2 class="mb-5">Danh sách bài thi trắc nghiệm</h2>
   <div class="cards" >
     <div class="card" id="card" ng-repeat="item in courses | limitTo:pageSize:(currentPage * pageSize)" data-aos="zoom-in-down">
@@ -8,7 +7,7 @@
         <img class="round" src="assets/images/logos/{{item.Logo}}" alt="Image Course" />
         <h3 class="card-title mt-4" style="height: 60px;">{{item.Name}}</h3>
         <div class="card-content text-center">
-          <p>Thời gian: 60 phút</p>          
+          <p>Thời gian: 10 phút</p>          
         </div>
       </div>
       <div ng-show="student!=null">

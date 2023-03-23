@@ -103,6 +103,23 @@ app.controller("profileCtrl", function ($scope,$rootScope, $location, dataServic
     $scope.getData($scope.showData)
   }
 
-
+  $scope.saveInfo = () => {
+    var fullname = document.getElementById('fullname').value
+    var email = document.getElementById('email').value
+    var obj = {
+      fullname: fullname,
+      email: email
+    }
+    Swal.fire({
+      icon: 'success',
+      title: 'Cập nhật thông tin thành công :)',
+      text: "Đăng nhập lại sẽ có hiệu lực !",
+      showConfirmButton: false,
+      timer: 2000
+    })
+    setTimeout(()=>{
+      dataService.updateStudent($rootScope.student.id, obj)
+    },2000)
+  }
 
 })

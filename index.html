@@ -78,21 +78,27 @@
                   <a ng-show="student==null" class="dropdown-item" href="#!register"><li>Đăng ký</li></a>
                   <a ng-show="student==null" class="dropdown-item" href="#!login"><li>Đăng nhập</li></a>
                   <a ng-show="student==null" class="dropdown-item" href="#!resetpass"><li>Quên mật khẩu</li></a>
-                  <a ng-hide="student==null" class="dropdown-item" href="#!profile"><li>Thông tin tài khoản</li></a>
-                  <a ng-hide="student==null" class="dropdown-item" ng-click="logoff()"><li>Đăng xuất</li></a>
+                  <a ng-hide="student==null" class="dropdown-item" href="#!profile"><li><i class="fa-solid fa-user"></i>&nbsp;Thông tin tài khoản</li></a>
+                  <a ng-hide="student==null" class="dropdown-item" href="#!profile?tab=change_pass  "><li><i class="fa-solid fa-key"></i>&nbsp;Đổi mật khẩu</li></a>
+                  <a ng-hide="student==null" class="dropdown-item" href="#!profile?tab=show_result"><li><i class="fa-brands fa-quinscape"></i>&nbsp;Điểm Quiz</li></a>
+                  <hr ng-hide="student==null">
+                  <a ng-hide="student==null" class="dropdown-item" ng-click="logoff()"><li><i class="fa-solid fa-right-from-bracket"></i>&nbsp;Đăng xuất</li></a>
                 </ul>
               </li>
             </ul>
             <div class="btn-group" id="acc_des">
               <span type="button" class="text-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-user"></i> {{(student==null)?'Tài khoản': 'Xin chào,'+student.fullname}}
+                {{(student==null)?'Tài khoản': 'Xin chào, '+student.fullname}}
               </span>
               <ul class="dropdown-menu dropdown-menu-end">
                 <a ng-show="student==null" class="dropdown-item" href="#!register"><li>Đăng ký</li></a>
                 <a ng-show="student==null" class="dropdown-item" href="#!login"><li>Đăng nhập</li></a>
                 <a ng-show="student==null" class="dropdown-item" href="#!resetpass"><li>Quên mật khẩu</li></a>
-                <a ng-hide="student==null" class="dropdown-item" href="#!profile"><li>Thông tin tài khoản</li></a>
-                <a ng-hide="student==null" class="dropdown-item" ng-click="logoff()"><li>Đăng xuất</li></a>
+                <a ng-hide="student==null" class="dropdown-item" href="#!profile"><li><i class="fa-solid fa-user"></i>&nbsp;Thông tin tài khoản</li></a>
+                <a ng-hide="student==null" class="dropdown-item" href="#!profile?tab=change_pass  "><li><i class="fa-solid fa-key"></i>&nbsp;Đổi mật khẩu</li></a>
+                <a ng-hide="student==null" class="dropdown-item" href="#!profile?tab=show_result"><li><i class="fa-brands fa-quinscape"></i>&nbsp;Điểm Quiz</li></a>
+                <hr ng-hide="student==null">
+                <a ng-hide="student==null" class="dropdown-item" ng-click="logoff()"><li><i class="fa-solid fa-right-from-bracket"></i>&nbsp;Đăng xuất</li></a>
               </ul>
             </div>
           </div>

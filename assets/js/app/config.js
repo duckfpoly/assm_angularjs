@@ -76,7 +76,6 @@ app.run(function ($rootScope,$location) {
       showConfirmButton: true,
       timer: 2000
     })
-    $location.path('#!index');
   }
 });
 
